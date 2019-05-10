@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.jeffjeong.foodrecipes"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // export schema 룸 sql 스키마
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+dependencies {
+
+    // 버전관리
+    def retrofitVersion = "2.5.0"
+    def lifecycle_version = "1.1.1"
+    def supportVersion = "28.0.0"
+    def glideVersion = "4.9.0"
+    def circleImageViewVersion = "3.0.0"
+    def okHttpVersion = "3.0.0"
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    // 레트로핏 http 통신 라이브러리
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    // json -> java 파싱 gson 컨버터
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // okhttp
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+
+    // 라이프 사이클 라이브러리
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+
+    // 카드뷰
+    implementation "com.android.support:cardview-v7:$supportVersion"
+
+    // 리사이클러뷰
+    implementation "com.android.support:recyclerview-v7:$supportVersion"
+
+    // 디자인
+    implementation "com.android.support:design:$supportVersion"
+
+
+    // 글라이드
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+    // 글라이드 리사이클러뷰 프리로더
+    implementation ("com.github.bumptech.glide:recyclerview-integration:$glideVersion") {
+        // Excludes the support library because it's already included by Glide.
+        transitive = false
+    }
+
+    // 서클이미지뷰
+    implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
+
+
+    // room persistence 라이브러리
+    implementation "android.arch.persistence.room:runtime:$lifecycle_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$lifecycle_version" // For Kotlin use kapt instead of annotationProcessor
+
+}
