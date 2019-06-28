@@ -14,5 +14,5 @@ https://www.food2fork.com/about/api
 - glide (for image processing)
 
 
-
+![mvvmRecipeApp](https://user-images.githubusercontent.com/35421421/60368335-970d1900-9a2b-11e9-8986-cfe492f61dec.gif)
 
